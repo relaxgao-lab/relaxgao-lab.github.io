@@ -11,7 +11,7 @@
   
   <title>
     
-      Tag 
+      设计模式-构建者 
       
       
       |
@@ -140,21 +140,129 @@
 
 
 
-  <!-- 标签页 url形式：https://yoursite/tags/ -->
-  <div class="container tag-index">
-    <div>
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/okhttp/" rel="tag">okhttp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">架构设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">4</span></li></ul>
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">设计模式-构建者</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-06 21:05:33
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                    #设计模式
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>构建者设计模式（Builder Pattern）是一种创建型设计模式，它的主要目的是将一个复杂对象的构建过程和其表示分离，以便同样的构建过程可以创建不同的表示。它通过提供一系列简单的步骤来构建对象，而不需要直接创建对象的所有步骤。这种模式将对象的构建过程划分为多个步骤，并在每个步骤中使用单独的方法来构建对象。</p>
+<p>使用构建者模式可以使得代码更加易读和易于维护。它可以减少构造函数的参数数量，避免构造函数参数顺序的混淆。同时，它还可以将对象构造过程中可能出现的问题封装起来，从而降低代码的复杂度。此外，构建者模式还可以实现可伸缩性，因为您可以轻松地添加、删除或更改构建步骤，以适应不同的需求。</p>
+<p>在 Android 应用开发中，构建者模式经常用于创建复杂的 UI 布局和自定义 View。比如，使用 RecyclerView 创建自定义的布局时，可以使用构建者模式来构建 ViewHolder。</p>
+<p>下面是一个简单的构建者模式的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Person private constructor(builder: Builder) &#123;</span><br><span class="line">    val name: String</span><br><span class="line">    val age: Int</span><br><span class="line">    val gender: String</span><br><span class="line"></span><br><span class="line">    init &#123;</span><br><span class="line">        this.name = builder.name</span><br><span class="line">        this.age = builder.age</span><br><span class="line">        this.gender = builder.gender</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class Builder &#123;</span><br><span class="line">        var name: String = &quot;&quot;</span><br><span class="line">        var age: Int = 0</span><br><span class="line">        var gender: String = &quot;&quot;</span><br><span class="line"></span><br><span class="line">        fun name(name: String) = apply &#123; this.name = name &#125;</span><br><span class="line">        fun age(age: Int) = apply &#123; this.age = age &#125;</span><br><span class="line">        fun gender(gender: String) = apply &#123; this.gender = gender &#125;</span><br><span class="line"></span><br><span class="line">        fun build() = Person(this)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，我们定义了一个 Person 类，并通过一个内部的 Builder 类来构建 Person 对象。在 Builder 类中，我们提供了一系列用于设置 Person 对象属性的方法，并通过 <code>build()</code> 方法来构建 Person 对象。在 Person 类的构造函数中，我们通过 Builder 类中设置的属性来初始化 Person 对象的属性。</p>
+<p>使用这个 Person 类时，可以通过 Builder 对象来构建 Person 对象，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val person = Person.Builder()</span><br><span class="line">    .name(&quot;Tom&quot;)</span><br><span class="line">    .age(30)</span><br><span class="line">    .gender(&quot;Male&quot;)</span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，我们通过 Builder 对象来构建一个名为 Tom、年龄为 30 岁、性别为男性的 Person 对象。</p>
+<p>构建者模式的优点在于它可以将对象的构建过程与表示分离，从而使得构建过程更加灵活。此外，构建者模式还可以隐藏对象的构建细节，从而提高代码的安全性和可维护性。缺点在于，构建者模式可能会导致代码</p>
+<h3 id="构建者在android中的实现"><a href="#构建者在android中的实现" class="headerlink" title="构建者在android中的实现"></a>构建者在android中的实现</h3><p>构建者设计模式在Android开发中被广泛应用于创建复杂的对象，例如构建AlertDialog、Notification、Intent等。</p>
+<p>以创建AlertDialog为例，Android提供了AlertDialog.Builder类，它是Builder设计模式的一种应用。AlertDialog.Builder类可以设置AlertDialog的标题、图标、消息内容、按钮等属性，最后通过create()方法创建AlertDialog对象。具体实现如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">val builder = AlertDialog.Builder(context)</span><br><span class="line">builder.setTitle(&quot;Dialog Title&quot;)</span><br><span class="line">builder.setMessage(&quot;Dialog Message&quot;)</span><br><span class="line">builder.setIcon(R.drawable.dialog_icon)</span><br><span class="line">builder.setPositiveButton(&quot;OK&quot;) &#123; _, _ -&gt;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br><span class="line">builder.setNegativeButton(&quot;Cancel&quot;) &#123; _, _ -&gt;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br><span class="line">val alertDialog = builder.create()</span><br><span class="line">alertDialog.show()</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，AlertDialog.Builder类可以看作是一个构建者，它封装了创建AlertDialog的细节，并提供了一系列的方法设置AlertDialog的属性。用户只需要调用相应的方法设置所需属性，最后调用create()方法即可创建AlertDialog对象。</p>
+<p>类似地，其他如Notification.Builder、Intent.Builder等都是Builder设计模式在Android开发中的体现，它们通过提供一系列的方法，使得创建复杂对象更加简单和灵活。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-06 21:05:33
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        #设计模式
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/02/01/OKhttp/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%80%85%E5%9C%A8android%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">构建者在android中的实现</span></a></li></ol>
+      
     </div>
   </div>
-  
 
   
+<script src="/js/catalog.js"></script>
 
-  
 
-  
 
-  
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
 
         
 <div class="footer">
@@ -416,12 +524,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + tags + '&url=' + http%3A%2F%2Fexample.com%2Ftags%2Findex.html + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%9E%84%E5%BB%BA%E8%80%85 + '&url=' + http%3A%2F%2Fexample.com%2F2020%2F05%2F07%2F%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F-%25E6%259E%2584%25E5%25BB%25BA%25E8%2580%2585%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/tags/index.html" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%9E%84%E5%BB%BA%E8%80%85/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
