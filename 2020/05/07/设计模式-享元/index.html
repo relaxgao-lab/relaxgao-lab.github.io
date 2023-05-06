@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="relax" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      设计模式-享元 
+      
+      
+      |
+    
+     relax&#39;s blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">relax's blog</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="https://github.com/relaxgao-lab">
+          <a target="_blank" rel="noopener" href="https://github.com/relaxgao-lab">Github</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">设计模式-享元</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-06 20:42:55
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                    #设计模式
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>享元设计模式是一种结构型设计模式，旨在通过共享尽可能多的对象，从而最小化内存使用和提高性能。</p>
+<p>在享元模式中，通过将对象的属性（即内部状态）和方法（即外部状态）分离，来实现对象共享。这样，如果一个请求所需的对象已经存在，那么可以重复使用这个对象而不是创建新的对象。这种共享减少了内存使用，因为每个共享对象的内部状态都是相同的，而外部状态可以在运行时传递。</p>
+<p>例如，如果我们要创建一个可以显示各种颜色的文本框，我们可以创建一个共享文本框工厂，并将相同颜色的文本框共享在一起。这样，在需要一个特定颜色的文本框时，我们可以从共享池中获取已经存在的文本框，而不是创建新的文本框。</p>
+<p>这种设计模式在需要创建大量对象的情况下特别有用，例如图形编辑器或游戏中的粒子系统。</p>
+<p>享元模式由以下几个要素组成：</p>
+<ol>
+<li>享元接口（Flyweight）：定义了共享对象的方法。</li>
+<li>具体享元（ConcreteFlyweight）：实现享元接口，并存储内部状态。具体享元对象应该是可共享的，并能够正确处理外部状态。</li>
+<li>享元工厂（FlyweightFactory）：负责创建和管理共享对象。当客户端请求一个共享对象时，工厂应该返回一个已经存在的对象，或者创建一个新的对象（如果不存在）。</li>
+<li>客户端（Client）：维护对享元对象的引用。外部状态应该作为参数传递给共享对象的方法。</li>
+</ol>
+<p>代码示例：享元模式来实现图书管理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">//定义图书接口</span><br><span class="line">interface Book &#123;</span><br><span class="line">    fun display(bookName: String, author: String, price: Double)</span><br><span class="line">&#125;</span><br><span class="line">//具体图书的实现类 英文书</span><br><span class="line">class EnglishBook : Book &#123;</span><br><span class="line">    override fun display(bookName: String, author: String, price: Double) &#123;</span><br><span class="line">        println(&quot;Displaying English Book:&quot;)</span><br><span class="line">        println(&quot;Book Name: $bookName&quot;)</span><br><span class="line">        println(&quot;Author: $author&quot;)</span><br><span class="line">        println(&quot;Price: $price&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//具体图书的实现类 汉语书</span><br><span class="line">class ChineseBook : Book &#123;</span><br><span class="line">    override fun display(bookName: String, author: String, price: Double) &#123;</span><br><span class="line">        println(&quot;Displaying Chinese Book:&quot;)</span><br><span class="line">        println(&quot;Book Name: $bookName&quot;)</span><br><span class="line">        println(&quot;Author: $author&quot;)</span><br><span class="line">        println(&quot;Price: $price&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//工厂模式</span><br><span class="line">class BookFactory &#123;</span><br><span class="line">		//伴生对象</span><br><span class="line">    companion object &#123;</span><br><span class="line">    		//定义容器存储创建出来的图书对象</span><br><span class="line">        private val books = mutableMapOf&lt;String, Book&gt;()</span><br><span class="line"></span><br><span class="line">        fun getBook(language: String): Book &#123;</span><br><span class="line">            val book = books[language]</span><br><span class="line">            if (book != null) &#123;//如果图书已经创建过 则直接使用，不再重新创建</span><br><span class="line">                println(&quot;Returning existing $language book object&quot;)</span><br><span class="line">                return book</span><br><span class="line">            &#125;</span><br><span class="line">						//图书不存在于容器里，需要创建生成一个</span><br><span class="line">            val newBook = when (language) &#123;</span><br><span class="line">                &quot;English&quot; -&gt; EnglishBook()</span><br><span class="line">                &quot;Chinese&quot; -&gt; ChineseBook()</span><br><span class="line">                else -&gt; throw IllegalArgumentException(&quot;Invalid book language&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">						//将创建出来的图书存储进容器</span><br><span class="line">            books[language] = newBook</span><br><span class="line">            println(&quot;Creating new $language book object&quot;)</span><br><span class="line">            返回图书对象</span><br><span class="line">            return newBook</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun main() &#123;</span><br><span class="line">    val book1 = BookFactory.getBook(&quot;English&quot;)//会创建生成一个英语图书对象</span><br><span class="line">    book1.display(&quot;The Catcher in the Rye&quot;, &quot;J. D. Salinger&quot;, 10.0)</span><br><span class="line"></span><br><span class="line">    val book2 = BookFactory.getBook(&quot;Chinese&quot;)//会创建生成一个汉语图书</span><br><span class="line">    book2.display(&quot;活着&quot;, &quot;余华&quot;, 20.0)</span><br><span class="line"></span><br><span class="line">    val book3 = BookFactory.getBook(&quot;English&quot;)//会复用之前创建出来的图书对象，因为它存在于容器里，所以直接使用即可</span><br><span class="line">    book3.display(&quot;To Kill a Mockingbird&quot;, &quot;Harper Lee&quot;, 12.0)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="享元在android里的实现"><a href="#享元在android里的实现" class="headerlink" title="享元在android里的实现"></a>享元在android里的实现</h3><h4 id="字符串池"><a href="#字符串池" class="headerlink" title="字符串池"></a>字符串池</h4><p>在 Android 中，Java 字符串是通过 String Pool 来管理的，这可以看作是一种享元模式的实现方式。如果需要在 Android 应用中创建多个字符串实例，则应使用字符串资源而不是硬编码的字符串。</p>
+<p>例如，在以下代码中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1 = &quot;Hello&quot;;</span><br><span class="line">String str2 = &quot;Hello&quot;;</span><br><span class="line">String str3 = new String(&quot;Hello&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>在Java中，字符串常量池（String Pool）是一个特殊的对象池，其中包含对所有字符串常量的引用。当创建字符串常量时，它们首先被放入字符串常量池中。如果后续需要使用相同的字符串常量，它们可以直接从池中获取，而不必创建新对象。</p>
+<p>在这个例子中，由于str1和str2都被初始化为”Hello”，因此它们都指向字符串常量池中的相同字符串对象。因此，它们指向同一个对象。而str3是通过创建一个新的String对象来初始化的，因此它指向堆内存中的另一个对象，与str1和str2不同。</p>
+<h4 id="Bitmap-内存缓存"><a href="#Bitmap-内存缓存" class="headerlink" title="Bitmap 内存缓存"></a>Bitmap 内存缓存</h4><p>在 Android 中，<code>Bitmap</code> 对象的创建和销毁非常消耗资源。因此，使用缓存池来重复使用 <code>Bitmap</code> 对象是非常有用的。</p>
+<p><code>BitmapFactory</code> 类提供了一个名为 <code>decodeByteArray()</code> 的方法，可以从字节数组中创建 <code>Bitmap</code> 对象。通过 <code>Bitmap</code> 对象的 <code>recycle()</code> 方法可以将其回收到缓存池中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class BitmapCache &#123;</span><br><span class="line">    private val cache = mutableMapOf&lt;String, Bitmap&gt;()</span><br><span class="line"></span><br><span class="line">    fun getBitmap(key: String): Bitmap? &#123;</span><br><span class="line">        return cache[key]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fun putBitmap(key: String, bitmap: Bitmap) &#123;</span><br><span class="line">        cache[key] = bitmap</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ImageLoader(private val cache: BitmapCache) &#123;</span><br><span class="line">    fun loadImage(url: String): Bitmap &#123;</span><br><span class="line">        var bitmap = cache.getBitmap(url)</span><br><span class="line">        if (bitmap == null) &#123;</span><br><span class="line">            // 从网络或本地磁盘中加载图片</span><br><span class="line">            bitmap = BitmapFactory.decodeFile(url)</span><br><span class="line">            // 将 Bitmap 对象添加到缓存池中</span><br><span class="line">            cache.putBitmap(url, bitmap)</span><br><span class="line">        &#125;</span><br><span class="line">        return bitmap</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，<code>BitmapCache</code> 类是一个缓存池，用于存储 <code>Bitmap</code> 对象。<code>ImageLoader</code> 类用于加载图像。如果图像在缓存池中已经存在，则返回缓存的 <code>Bitmap</code> 对象。否则，从磁盘或网络中加载图像，并将其添加到缓存池中。</p>
+<p>通过这种方式，可以减少创建 <code>Bitmap</code> 对象的数量，从而节省内存和 CPU 资源。</p>
+<h4 id="View-视图的复用"><a href="#View-视图的复用" class="headerlink" title="View 视图的复用"></a>View 视图的复用</h4><p>在 Android 中，当需要创建多个视图时，可以使用视图的复用来减少内存消耗。例如，在 <code>ListView</code> 或 <code>RecyclerView</code> 中，通过重复使用已经存在的视图来显示列表项。</p>
+<p>在 <code>RecyclerView</code> 中，通过使用 <code>RecyclerView.ViewHolder</code> 来实现视图的复用。<code>ViewHolder</code> 对象包含列表项的视图及其子视图的引用，可以在列表滚动时重复使用，从而减少创建新的视图的数量。</p>
+<p>以下是一个缓存机制</p>
+<p>RecyclerView 在滑动过程中需要频繁地创建和销毁视图。为了减少创建视图的开销，RecyclerView 使用了视图缓存的机制。它会在缓存中存储一定数量的视图，下次使用时直接从缓存中获取，而不是重新创建。这样就能大大提高列表的滑动流畅度。</p>
+<p>RecyclerView 的视图缓存主要包括两部分：Scrap 缓存和 Recycler 缓存。</p>
+<p>Scrap 缓存：Scrap 缓存是用来暂时存放在屏幕上被滑出去的 itemView，等待重新利用。当一个 itemView 从屏幕上滑出时，它会被放入 Scrap 缓存中。当需要创建一个新的 itemView 时，RecyclerView 会优先从 Scrap 缓存中获取。</p>
+<p>Recycler 缓存：Recycler 缓存是用来存放那些不再可见的 itemView，以供下次使用。当一个 itemView 不再可见时，它会被放入 Recycler 缓存中。当需要创建一个新的 itemView 时，RecyclerView 会优先从 Recycler 缓存中获取。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2020/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-06 20:42:55
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        #设计模式
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2021/02/01/OKhttp/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E5%9C%A8android%E9%87%8C%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">享元在android里的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%B1%A0"><span class="toc-text">字符串池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bitmap-%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98"><span class="toc-text">Bitmap 内存缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#View-%E8%A7%86%E5%9B%BE%E7%9A%84%E5%A4%8D%E7%94%A8"><span class="toc-text">View 视图的复用</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/relaxgao-lab/RelaxWebView">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/about/">Copyright © 2023 relax</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83 + '&url=' + http%3A%2F%2Fexample.com%2F2020%2F05%2F07%2F%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F-%25E4%25BA%25AB%25E5%2585%2583%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
