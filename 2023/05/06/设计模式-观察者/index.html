@@ -155,12 +155,51 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-05-06 14:12:29
+          2023-05-06 16:06:52
         </span>
         
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                    #设计模式
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
       <div class="markdown-body">
-        
+        <h4 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h4><p>观察者模式是一种行为型设计模式，它定义了对象间的一种一对多的依赖关系，使得当一个对象的状态发生改变时，所有依赖于它的对象都会得到通知并自动更新。这种模式的核心思想是一个对象发生变化时，它的所有依赖者都会受到通知并且自动更新。</p>
+<p>在观察者模式中，有两个核心的对象：被观察者和观察者。被观察者维护一个观察者列表，用来存储它的所有观察者对象。当被观察者的状态发生改变时，它会遍历观察者列表，通知每个观察者进行更新操作。</p>
+<p>观察者模式可以用来解决许多问题，比如事件驱动编程、UI设计、网络编程等等。它的优点包括：</p>
+<ul>
+<li>松耦合：被观察者和观察者之间的关系是松耦合的，它们之间并没有直接的依赖关系，可以灵活的增加或删除观察者。</li>
+<li>可扩展性：观察者模式可以很方便地增加新的观察者对象，而且不需要对现有的代码进行修改。</li>
+<li>开放-封闭原则：观察者模式支持开放-封闭原则，即可以扩展一个模块的行为，而不需要修改源代码。</li>
+</ul>
+<p>但观察者模式也有一些缺点：</p>
+<ul>
+<li>内存泄露：在使用观察者模式时，如果没有正确的解除观察者和被观察者之间的关系，会导致内存泄露。</li>
+<li>并发性：如果一个被观察者对象在遍历观察者列表的过程中，有其他线程对它进行了状态修改，那么就可能导致一些观察者无法得到正确的通知。</li>
+</ul>
+<p>观察者设计模式的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// 观察者接口，定义观察者的更新方法</span><br><span class="line">interface Observer &#123;</span><br><span class="line">    fun update(subject: Subject)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 主题接口，定义主题的基本行为</span><br><span class="line">interface Subject &#123;</span><br><span class="line">    fun attach(observer: Observer) // 添加观察者</span><br><span class="line">    fun detach(observer: Observer) // 移除观察者</span><br><span class="line">    fun notifyObservers() // 通知所有观察者</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 具体主题实现主题接口</span><br><span class="line">class ConcreteSubject : Subject &#123;</span><br><span class="line">    private val observers = mutableListOf&lt;Observer&gt;()</span><br><span class="line"></span><br><span class="line">    override fun attach(observer: Observer) &#123;</span><br><span class="line">        observers.add(observer)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun detach(observer: Observer) &#123;</span><br><span class="line">        observers.remove(observer)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun notifyObservers() &#123;</span><br><span class="line">        for (observer in observers) &#123;</span><br><span class="line">            observer.update(this)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fun doSomething() &#123;</span><br><span class="line">        println(&quot;ConcreteSubject is doing something.&quot;)</span><br><span class="line">        notifyObservers()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 具体观察者实现观察者接口</span><br><span class="line">class ConcreteObserver(private val name: String) : Observer &#123;</span><br><span class="line">    override fun update(subject: Subject) &#123;</span><br><span class="line">        println(&quot;$name is notified.&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun main() &#123;</span><br><span class="line">    val subject = ConcreteSubject()</span><br><span class="line">    val observer1 = ConcreteObserver(&quot;观察者1&quot;)</span><br><span class="line">    val observer2 = ConcreteObserver(&quot;观察者2&quot;)</span><br><span class="line"></span><br><span class="line">    subject.attach(observer1) // 添加观察者1</span><br><span class="line">    subject.attach(observer2) // 添加观察者2</span><br><span class="line"></span><br><span class="line">    subject.doSomething() // 主题执行某些操作，通知所有观察者</span><br><span class="line"></span><br><span class="line">    subject.detach(observer1) // 移除观察者1</span><br><span class="line"></span><br><span class="line">    subject.doSomething() // 主题执行某些操作，通知所有剩余的观察者</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个示例中，定义了一个 <code>Subject</code> 接口和一个 <code>Observer</code> 接口。具体的主题类 <code>ConcreteSubject</code> 实现了 <code>Subject</code> 接口，而观察者类 <code>ConcreteObserver</code> 实现了 <code>Observer</code> 接口。在 <code>ConcreteSubject</code> 中，可以动态添加和删除观察者，并在某个时刻调用 <code>notifyObservers()</code> 方法来通知所有观察者。在 <code>ConcreteObserver</code> 中，实现了 <code>update()</code> 方法来处理通知。</p>
+<p>在 <code>main()</code> 函数中，创建了一个主题对象和两个观察者对象，然后将两个观察者对象添加到主题对象中。接着，调用主题对象的 <code>doSomething()</code> 方法，观察者对象会收到通知并进行相应处理。然后，将其中一个观察者对象从主题对象中删除，再次调用 <code>doSomething()</code> 方法，只有一个观察者对象会收到通知。</p>
+<h4 id="观察者在android里的应用"><a href="#观察者在android里的应用" class="headerlink" title="观察者在android里的应用"></a>观察者在android里的应用</h4><p>在Android中，观察者模式经常用于实现MVC（模型-视图-控制器）模式的一部分，以便Model和View之间的通信。当Model发生更改时，它会通知观察者，即Controller，然后Controller将更新View，以便用户可以看到更新的状态。Android中的许多框架都使用观察者模式，例如LiveData和RxJava。以下是一些Android中观察者模式的示例用例：</p>
+<h5 id="LiveData实现"><a href="#LiveData实现" class="headerlink" title="LiveData实现"></a>LiveData实现</h5><p> 实现LiveData LiveData是一种具有生命周期感知能力的可观察数据存储类。它在观察到数据变化时通知观察者。以下是LiveData的一个示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class MyViewModel : ViewModel() &#123;</span><br><span class="line">    private val _myLiveData = MutableLiveData&lt;String&gt;()</span><br><span class="line"></span><br><span class="line">    val myLiveData: LiveData&lt;String&gt;</span><br><span class="line">        get() = _myLiveData</span><br><span class="line"></span><br><span class="line">    fun setValue(value: String) &#123;</span><br><span class="line">        _myLiveData.value = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyActivity : AppCompatActivity() &#123;</span><br><span class="line">    private lateinit var viewModel: MyViewModel</span><br><span class="line"></span><br><span class="line">    override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line"></span><br><span class="line">        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)</span><br><span class="line"></span><br><span class="line">        viewModel.myLiveData.observe(this, Observer &#123; value -&gt;</span><br><span class="line">            // 当 LiveData 发生变化时更新 UI</span><br><span class="line">            textView.text = value</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，MyViewModel是一个被观察的对象，而MyActivity是一个观察者。当MyViewModel中的_myLiveData数据发生变化时，它会通知它的观察者MyActivity，然后MyActivity更新UI。</p>
+<h5 id="rxjava实现"><a href="#rxjava实现" class="headerlink" title="rxjava实现"></a>rxjava实现</h5><p>RxJava是一个用于编写异步和基于事件的程序的库。它使用观察者模式来实现异步事件的处理。以下是使用RxJava的一个示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">val observable = Observable.create&lt;String&gt; &#123; emitter -&gt;</span><br><span class="line">    // 一些异步操作，例如从网络请求数据</span><br><span class="line">    // 当操作完成时，发出事件</span><br><span class="line">    emitter.onNext(&quot;Hello&quot;)</span><br><span class="line">    emitter.onNext(&quot;World&quot;)</span><br><span class="line">    emitter.onComplete()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">val observer = object : Observer&lt;String&gt; &#123;</span><br><span class="line">    override fun onSubscribe(d: Disposable) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    override fun onNext(value: String) &#123;</span><br><span class="line">        // 处理 onNext 事件</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun onError(e: Throwable) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    override fun onComplete() &#123;</span><br><span class="line">        // 处理 onComplete 事件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">observable.subscribe(observer)</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，observable是一个被观察者，而observer是一个观察者。当observable发出事件时，它会通知它的观察者observer，然后observer处理事件。</p>
+<p>这些都是在Android中使用观察者模式的示例。通过使用观察者模式，我们可以轻松地实现响应式编程，使我们的代码更加模块化和可维护。</p>
+
       </div>
       
         <div class="prev-or-next">
@@ -175,9 +214,20 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2023-05-06 14:12:29
+              2023-05-06 16:06:52
             </span>
             
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        #设计模式
+                      </a>
+                    </span>
+                    
+                  </span>
+              
           </div>
           <div class="post-foot-prev">
             
@@ -186,6 +236,23 @@
       
     </div>
     
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E5%9C%A8android%E9%87%8C%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">观察者在android里的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LiveData%E5%AE%9E%E7%8E%B0"><span class="toc-text">LiveData实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rxjava%E5%AE%9E%E7%8E%B0"><span class="toc-text">rxjava实现</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
 
     
       <div class="comments-container">
