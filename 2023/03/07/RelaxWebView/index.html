@@ -20,8 +20,8 @@
   </title>
 
   
-    <link rel="apple-touch-icon" href="/images/favicon.png">
-    <link rel="icon" href="/images/favicon.png">
+    <link rel="apple-touch-icon" href="/images/favicon_relax.png">
+    <link rel="icon" href="/images/favicon_relax.png">
   
 
   <!-- Raleway-Font -->
@@ -68,7 +68,7 @@
     <a href="/">
       <!-- 头像取消懒加载，添加no-lazy -->
       
-        <img src="/images/avatar.png" alt="">
+        <img src="/images/avatar_relax.png" alt="">
       
     </a>
     <div class="nickname"><a href="/">relax's blog</a></div>
@@ -155,7 +155,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-05-06 10:27:44
+          2023-05-06 10:29:02
         </span>
         
               <span class="post-tags">
@@ -248,7 +248,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@JavascriptInterface</span><br><span class="line">   public void takeNativeAction(final String jsParam) &#123;</span><br><span class="line">       Log.e(TAG, &quot;this is a call from html javascript.&quot; + jsParam);</span><br><span class="line">       if (!TextUtils.isEmpty(jsParam)) &#123;</span><br><span class="line">           final JsParam jsParamObject = new Gson().fromJson(jsParam, JsParam.class);</span><br><span class="line">           if (jsParamObject != null) &#123;</span><br><span class="line">               WebViewProcessCommandsDispatcher.INSTANCE.executeCommand(jsParamObject.name, new 			Gson().toJson(jsParamObject.param), this);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="Autoservice-1"><a href="#Autoservice-1" class="headerlink" title="Autoservice"></a>Autoservice</h5><p>所有用于SPI机制的具体实现类都会使用@AutoService注解，就是给所有 commad 接口和 service 接口的实现类打上标签，并在 META-INFO 目录下生成对应的接口文件，该文件里的内容是该接口所有的实现类，该文件用于 serviceloader 加载并解析出所有的 commad或者service 的实现类。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/relaxgao-lab/RelaxWebView">项目地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/relaxgao-lab/RelaxWebView">开源项目地址</a></p>
 
       </div>
       
@@ -264,7 +264,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2023-05-06 10:27:44
+              2023-05-06 10:29:02
             </span>
             
                   <span class="post-tags">
