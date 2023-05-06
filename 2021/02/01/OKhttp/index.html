@@ -155,7 +155,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-05-05 16:00:25
+          2023-05-06 08:05:30
         </span>
         
               <span class="post-tags">
@@ -185,7 +185,7 @@
 <li>缓存响应数据减少重复的网络请求</li>
 <li>请求失败自动重试主机的其他ip，自动重定向 …….</li>
 </ul>
-<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><img src="/2021/05/01/OKhttp/okhttp_%20flowchart.png" class="">
+<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><img src="/2021/02/01/OKhttp/okhttp_%20flowchart.png" class="">
 
 
 <figure class="highlight plaintext"><figcaption><span>okhttp3.*;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">public class OkHttpExample &#123;</span><br><span class="line"></span><br><span class="line">    private final OkHttpClient client = new OkHttpClient();</span><br><span class="line"></span><br><span class="line">    // 异步请求示例</span><br><span class="line">    public void runAsyncRequest(String url) &#123;</span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        client.newCall(request).enqueue(new Callback() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onFailure(Call call, IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onResponse(Call call, Response response) throws IOException &#123;</span><br><span class="line">                System.out.println(response.body().string());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 同步请求示例</span><br><span class="line">    public void runSyncRequest(String url) throws IOException &#123;</span><br><span class="line">        Request request = new Request.Builder()</span><br><span class="line">                .url(url)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        try (Response response = client.newCall(request).execute()) &#123;</span><br><span class="line">            System.out.println(response.body().string());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        OkHttpExample example = new OkHttpExample();</span><br><span class="line">        String url = &quot;https://jsonplaceholder.typicode.com/posts/1&quot;;</span><br><span class="line">        try &#123;</span><br><span class="line">            example.runSyncRequest(url);</span><br><span class="line">            example.runAsyncRequest(url);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -261,7 +261,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//传递者</span><br><span class="line">abstract class Handler&#123;</span><br><span class="line">//责任链中下一个传递者</span><br><span class="line">protected Handler nextHandler;</span><br><span class="line">    boolean request(String msg);</span><br><span class="line">    public void setNextHandler(Handler handler)&#123;</span><br><span class="line">		nextHandler = handler;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class AHandler extends Handler&#123;</span><br><span class="line">    public boolean request(String msg)&#123;</span><br><span class="line">     System.out.println(&quot;A&quot;+msg);</span><br><span class="line">        boolean resp = nextHandler.request(msg);</span><br><span class="line">				return resp;</span><br><span class="line">			&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class BHandler extends Handler&#123;</span><br><span class="line">    public boolean request(String msg)&#123;</span><br><span class="line">         System.out.println(&quot;B&quot;+msg);</span><br><span class="line">        boolean resp = nextHandler.request();</span><br><span class="line">				return resp;</span><br><span class="line">&#125;</span><br><span class="line">public class CHandler extends Handler&#123;</span><br><span class="line">    public boolean request(String msg)&#123;</span><br><span class="line">         System.out.println(&quot;C&quot;+msg);</span><br><span class="line">        boolean resp = nextHandler.request();</span><br><span class="line">				return resp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AHandler ahandler = new AHandler();</span><br><span class="line">BHandler bhandler = new BHandler();</span><br><span class="line">CHandler chandler = new CHandler();</span><br><span class="line">ahandler.setNextHandler(bhandler);</span><br><span class="line">bhandler.setNextHandler(chandler);</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">   ahandler.request(&quot;处理消息&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在责任链模式中，每一个对象对其下家的引用而接起来形成一条链。请求在这个链上传递，直到链上的某一个对象 决定处理此请求。客户并不知道链上的哪一个对象最终处理这个请求，系统可以在不影响客户端的 情况下动态的重 新组织链和分配责任。处理者有两个选择:承担责任或者把责任推给下家。一个请求可以最终不被任何接收端对象 所接受。</p>
-<h4 id="拦截器流程"><a href="#拦截器流程" class="headerlink" title="拦截器流程"></a>拦截器流程</h4><img src="/2021/05/01/OKhttp/%E6%8B%A6%E6%88%AA%E5%99%A8%E6%B5%81%E7%A8%8B.png" class="">
+<h4 id="拦截器流程"><a href="#拦截器流程" class="headerlink" title="拦截器流程"></a>拦截器流程</h4><img src="/2021/02/01/OKhttp/%E6%8B%A6%E6%88%AA%E5%99%A8%E6%B5%81%E7%A8%8B.png" class="">
 
 <p>请求会被交给责任链中的一个个拦截器。默认情况下有五大拦截器：</p>
 <ol>
@@ -297,7 +297,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2021/05/01/hello-world/" target="_self">
+              <a href="/2020/05/01/hello-world/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -306,7 +306,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2023-05-05 16:00:25
+              2023-05-06 08:05:30
             </span>
             
                   <span class="post-tags">
@@ -329,7 +329,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2023/05/05/RelaxWebView/" target="_self">
+              <a href="/2022/03/07/RelaxWebView/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -632,12 +632,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Okhttp%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90 + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F05%2F01%2FOKhttp%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Okhttp%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90 + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F02%2F01%2FOKhttp%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/05/01/OKhttp/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/02/01/OKhttp/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
