@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2020 
+      数据结构-栈 
       
       
       |
@@ -106,170 +106,163 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2023</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">数据结构-栈</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-07 14:30:23
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">
+                    #数据结构
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>栈（Stack）是一种基于 LIFO（Last-In-First-Out，后进先出）原则的数据结构，即后进入的元素先弹出。它只允许在表的一端进行插入和删除操作，通常称为栈顶（top）。</p>
+<p>栈常用于实现函数调用栈、表达式求值、括号匹配、浏览器的前进和后退等场景。</p>
+<p>以下是一个简单的栈的实现示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class Stack&lt;T&gt; &#123;</span><br><span class="line">    private List&lt;T&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    // 入栈</span><br><span class="line">    public void push(T item) &#123;</span><br><span class="line">        list.add(item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 出栈</span><br><span class="line">    public T pop() &#123;</span><br><span class="line">        if (isEmpty()) &#123;</span><br><span class="line">            throw new EmptyStackException();</span><br><span class="line">        &#125;</span><br><span class="line">        return list.remove(list.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取栈顶元素</span><br><span class="line">    public T peek() &#123;</span><br><span class="line">        if (isEmpty()) &#123;</span><br><span class="line">            throw new EmptyStackException();</span><br><span class="line">        &#125;</span><br><span class="line">        return list.get(list.size() - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 判断栈是否为空</span><br><span class="line">    public boolean isEmpty() &#123;</span><br><span class="line">        return list.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取栈的大小</span><br><span class="line">    public int size() &#123;</span><br><span class="line">        return list.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>栈的时间复杂度：</p>
+<ul>
+<li>push()、pop()、peek()、isEmpty()、size() 操作的时间复杂度均为 O(1)。</li>
+</ul>
+<p>栈的空间复杂度：</p>
+<ul>
+<li>栈的空间复杂度取决于栈中元素的个数，即为 O(n)。</li>
+</ul>
+<h3 id="栈在Android里的实现"><a href="#栈在Android里的实现" class="headerlink" title="栈在Android里的实现"></a>栈在Android里的实现</h3><ul>
+<li>Activity 栈：Activity 栈是指 Android 系统中用来保存 Activity 的栈结构，以便在需要时进行管理和操作。每当启动一个新的 Activity 时，它就会被压入 Activity 栈的栈顶，而当用户按下返回键时，当前 Activity 会被弹出栈顶，从而回到前一个 Activity。Activity 栈的实现是通过系统的 ActivityManagerService 维护的。</li>
+<li>任务栈是指 Android 中用来保存任务（Task）的栈结构，它是由一系列 Activity 组成的，表示一个用户操作的完整流程。每当用户启动一个应用时，一个新的任务就会被创建，该任务包含了该应用的 Activity。当用户按下返回键时，当前 Activity 会被弹出栈顶，如果该任务的 Activity 栈为空，则整个任务也会被销毁。任务栈的实现是通过系统的 ActivityStack 维护的。</li>
+</ul>
+<p>补充说明：Activity 栈是指保存 Activity 的栈结构，而任务栈是指保存任务（由一系列 Activity 组成）的栈结构。Activity 栈和任务栈之间存在一定的关联，但它们是两个不同的概念。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-07 14:30:23
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">
+                        #数据结构
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
       
-      <div class="post-item" title="高扩展低耦合的webview">
-        <div class="time-m-d">02-07</div>
-        <div class="title">
-          <a href="/2023/02/07/RelaxWebView/">
-            <span>高扩展低耦合的webview</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
       
-      <div class="post-item" title="Okhttp原理分析">
-        <div class="time-m-d">02-01</div>
-        <div class="title">
-          <a href="/2021/02/01/OKhttp/">
-            <span>Okhttp原理分析</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2020</span>
-          </h2>
-        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%9C%A8Android%E9%87%8C%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">栈在Android里的实现</span></a></li></ol>
       
-      <div class="post-item" title="设计模式-装饰器">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/">
-            <span>设计模式-装饰器</span>
-          </a>
-        </div>
-      </div>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="设计模式-构建者">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%9E%84%E5%BB%BA%E8%80%85/">
-            <span>设计模式-构建者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-享元">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83/">
-            <span>设计模式-享元</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-责任链">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE/">
-            <span>设计模式-责任链</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-观察者">
-        <div class="time-m-d">05-06</div>
-        <div class="title">
-          <a href="/2020/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85/">
-            <span>设计模式-观察者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-工厂">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2020/01/06/%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-            <span>设计模式-工厂</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2017</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="数据结构-哈希表">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%93%88%E5%B8%8C%E8%A1%A8/">
-            <span>数据结构-哈希表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-二叉树">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91/">
-            <span>数据结构-二叉树</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-队列">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/">
-            <span>数据结构-队列</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-栈">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/">
-            <span>数据结构-栈</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-链表">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/">
-            <span>数据结构-链表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-数组">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84/">
-            <span>数据结构-数组</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -524,6 +517,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88 + '&url=' + http%3A%2F%2Fexample.com%2F2017%2F05%2F07%2F%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584-%25E6%25A0%2588%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
