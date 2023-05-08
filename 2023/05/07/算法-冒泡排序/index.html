@@ -8,10 +8,13 @@
   <meta name="author" content="relax" />
   <meta name="description" content="" />
   
-    <meta name="robots" content="noindex" />
-  
   
   <title>
+    
+      算法-冒泡排序 
+      
+      
+      |
     
      relax&#39;s blog
   </title>
@@ -103,84 +106,153 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="数据结构-二叉树">
-        <div class="time-m-d">2017-06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91/">
-            
-              
-                <span>数据结构-二叉树</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">算法-冒泡排序</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-08 08:09:28
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                    #算法
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="数据结构-队列">
-        <div class="time-m-d">2017-05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/">
-            
-              
-                <span>数据结构-队列</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>冒泡排序（Bubble Sort）是一种简单的排序算法，它的基本思想是从序列的开头开始，依次比较相邻的两个元素，如果它们的顺序不正确就交换它们的位置，直到序列末尾。这样一轮比较下来，最大的元素就被交换到了序列的最后面，然后再从头开始进行下一轮比较，直到整个序列都被排序。</p>
+<p>以下是冒泡排序的基本实现思路：</p>
+<ol>
+<li>从序列的第一个元素开始，依次比较相邻的两个元素，如果前面的元素大于后面的元素，就交换它们的位置。</li>
+<li>继续从序列的第一个元素开始，重复执行步骤1，直到序列末尾。</li>
+<li>重复执行步骤1和步骤2，直到整个序列都被排序。</li>
+</ol>
+<p><video src="/2023/05/07/%E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/bubblesort.mp4"  style="width: 100%; height: auto;" controls>  </video></p>
+<p>算法的核心是两层循环：外层循环控制整个排序过程的进行，内层循环用来比较相邻的元素并交换它们的位置。</p>
+<p>冒泡排序的时间复杂度为 O(n^2)，空间复杂度为 O(1)。它是一种稳定的排序算法，适用于数据量比较小的情况。</p>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class BubbleSort &#123;</span><br><span class="line">    public static void sort(int[] arr) &#123;</span><br><span class="line">        int n = arr.length;</span><br><span class="line">        //外层循环控制的是要扫描的次数，</span><br><span class="line">        for (int i = 0; i &lt; n - 1; i++) &#123;</span><br><span class="line">        //内层循环每走完一遍就会确定末尾一个最大值，因此通过n - i - 1来缩减排序的范围</span><br><span class="line">            for (int j = 0; j &lt; n - i - 1; j++) &#123;</span><br><span class="line">                if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">                  // 交换 arr[j] 和 arr[j+1] 的位置</span><br><span class="line">                    int temp = arr[j];</span><br><span class="line">                    arr[j] = arr[j + 1];</span><br><span class="line">                    arr[j + 1] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       </div>
-    
-      <div class="post-item" title="数据结构-栈">
-        <div class="time-m-d">2017-05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>数据结构-栈</span>
-              
+              <a href="/2023/02/07/RelaxWebView/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-08 08:09:28
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                        #算法
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="数据结构-链表">
-        <div class="time-m-d">2017-05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/">
-            
-              
-                <span>数据结构-链表</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="数据结构-数组">
-        <div class="time-m-d">2017-05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84/">
-            
-              
-                <span>数据结构-数组</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-      <a href="/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">2 / 2</span>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -435,6 +507,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F + '&url=' + http%3A%2F%2Fexample.com%2F2023%2F05%2F07%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%2586%2592%25E6%25B3%25A1%25E6%258E%2592%25E5%25BA%258F%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2023/05/07/%E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
