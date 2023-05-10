@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2018 
+      算法-选择排序 
       
       
       |
@@ -106,213 +106,141 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2023</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">算法-选择排序</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-09 16:52:30
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                    #算法
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>选择排序（Selection Sort）是一种简单直观的排序算法，其思想是在未排序序列中选择最小（大）元素放在起始位置，然后再从剩余未排序元素中选择最小（大）元素放在已排序序列末尾，以此类推，直到所有元素均排序完毕。</p>
+<p>具体实现如下：</p>
+<ol>
+<li>遍历整个数组，找到最小值所在的下标；</li>
+<li>将最小值与数组的第一个元素交换位置；</li>
+<li>接下来在剩余未排序的元素中继续执行上述操作，每次选择剩余元素中的最小值放到已排序部分的末尾；</li>
+<li>直到所有元素均排序完毕。</li>
+</ol>
+<p>选择排序的时间复杂度为O(n^2)，其中n为数组长度，不论数组是否已经有序，其时间复杂度都是O(n^2)，因此它并不适用于大规模数据的排序。选择排序的优点是简单易懂，且由于交换次数较少，适用于数据移动成本较高的排序场景。</p>
+<p><video src="/2018/01/06/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/selectionsort.mp4"  style="width: 100%; height: auto;" controls>  </video></p>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class SelectionSort &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] arr = &#123;64, 25, 12, 22, 11&#125;;</span><br><span class="line">        selectionSort(arr);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void selectionSort(int[] arr) &#123;</span><br><span class="line">        int n = arr.length;</span><br><span class="line"></span><br><span class="line">        // 遍历数组，外层循环控制的是扫描的次数</span><br><span class="line">        for (int i = 0; i &lt; n - 1; i++) &#123;</span><br><span class="line">        		//用一个指针记录范围的最小值，这里假定排序范围的首个元素是最小值</span><br><span class="line">            int min_idx = i;</span><br><span class="line">            for (int j = i + 1; j &lt; n; j++) &#123;</span><br><span class="line">            //从排序范围的首个元素的下一个元素开始进行比较 如果找到更小的值 就将最小值指针指向这个最小值所在的位置</span><br><span class="line">            //内层循环 每循环一次就会在未排序范围里确定一个最小值</span><br><span class="line">                if (arr[j] &lt; arr[min_idx]) &#123;</span><br><span class="line">                    min_idx = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 将未排序部分的最小值与未排序部分的第一个元素交换位置</span><br><span class="line">            </span><br><span class="line">            //用一个变量保存最小值</span><br><span class="line">            int temp = arr[min_idx];</span><br><span class="line">            //把i指针指向的元素赋值给最小值指针指向的位置</span><br><span class="line">            arr[min_idx] = arr[i];</span><br><span class="line">            然后再把变量保存的最小值赋值给指针指向的位置</span><br><span class="line">            arr[i] = temp;</span><br><span class="line">            </span><br><span class="line">            //接下来在剩余未排序的元素中继续执行上述操作,直到所有元素均排序完毕。</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/01/05/%E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-09 16:52:30
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                        #算法
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
       
-      <div class="post-item" title="高扩展低耦合的webview">
-        <div class="time-m-d">02-07</div>
-        <div class="title">
-          <a href="/2023/02/07/RelaxWebView/">
-            <span>高扩展低耦合的webview</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="Okhttp原理分析">
-        <div class="time-m-d">02-01</div>
-        <div class="title">
-          <a href="/2021/02/01/OKhttp/">
-            <span>Okhttp原理分析</span>
-          </a>
-        </div>
-      </div>
+
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2020</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="设计模式-装饰器">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/">
-            <span>设计模式-装饰器</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-构建者">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%9E%84%E5%BB%BA%E8%80%85/">
-            <span>设计模式-构建者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-享元">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83/">
-            <span>设计模式-享元</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-责任链">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE/">
-            <span>设计模式-责任链</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-观察者">
-        <div class="time-m-d">05-06</div>
-        <div class="title">
-          <a href="/2020/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85/">
-            <span>设计模式-观察者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-工厂">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2020/01/06/%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-            <span>设计模式-工厂</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2018</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="算法-归并排序">
-        <div class="time-m-d">01-09</div>
-        <div class="title">
-          <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-            <span>算法-归并排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-插入排序">
-        <div class="time-m-d">01-09</div>
-        <div class="title">
-          <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
-            <span>算法-插入排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-选择排序">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2018/01/06/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-            <span>算法-选择排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-冒泡排序">
-        <div class="time-m-d">01-05</div>
-        <div class="title">
-          <a href="/2018/01/05/%E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
-            <span>算法-冒泡排序</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2017</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="数据结构-哈希表">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%93%88%E5%B8%8C%E8%A1%A8/">
-            <span>数据结构-哈希表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-二叉树">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91/">
-            <span>数据结构-二叉树</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-队列">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/">
-            <span>数据结构-队列</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-栈">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/">
-            <span>数据结构-栈</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-链表">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/">
-            <span>数据结构-链表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-数组">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84/">
-            <span>数据结构-数组</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -567,6 +495,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F + '&url=' + http%3A%2F%2Fexample.com%2F2018%2F01%2F06%2F%25E7%25AE%2597%25E6%25B3%2595-%25E9%2580%2589%25E6%258B%25A9%25E6%258E%2592%25E5%25BA%258F%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2018/01/06/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

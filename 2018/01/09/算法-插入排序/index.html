@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2018 
+      算法-插入排序 
       
       
       |
@@ -106,213 +106,158 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2023</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">算法-插入排序</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-05-09 19:21:01
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                    #算法
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>插入排序是一种简单直观的排序算法，它的基本思想是：将一个记录插入到已经排好序的有序表中，从而得到一个新的、记录数增加1的有序表。它的排序过程类似于打扑克牌时整理手牌的过程。</p>
+<p>插入排序的具体实现步骤如下：</p>
+<ol>
+<li>将第一个元素看做是已经排好序的有序表，第二个元素到最后一个元素看做是无序表。</li>
+<li>从第二个元素开始，将它插入到有序表中的适当位置，使得插入后仍然保持有序性。</li>
+<li>重复第2步，直到所有元素都插入到有序表中为止。</li>
+</ol>
+<p>时间复杂度：O(n^2)</p>
+<p>空间复杂度：O(1)</p>
+<p><video src="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/insertsort.mp4"  style="width: 100%; height: auto;" controls>  </video></p>
+<p>代码示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void insertionSort(int[] arr) &#123;</span><br><span class="line">    int n = arr.length;</span><br><span class="line">    for (int i = 1; i &lt; n; ++i)&#123;//从第二个元素开始插入（假设第二个元素开始到最后是无序表）</span><br><span class="line">        int key = arr[i]; // 确定当前待插入元素</span><br><span class="line">        int j = i - 1; // 找到已排好序的最后一个元素的下标</span><br><span class="line">  // 查找插入位置（从已经排序好的元素的最后一个元素开始依次往前找，如果当前元素大于待插入元素，则当前元素需要往后移动。腾出位置）</span><br><span class="line">        while (j &gt;= 0 &amp;&amp; arr[j] &gt; key) &#123;</span><br><span class="line">            arr[j + 1] = arr[j]; // 将有序列表中大于待插入元素的元素后移一位</span><br><span class="line">            j--;//再往前找</span><br><span class="line">        &#125;</span><br><span class="line">        内层循环结束后，确定了要插入的位置</span><br><span class="line">        arr[j + 1] = key; // 插入元素</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/01/06/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-05-09 19:21:01
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
+                        #算法
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
       
-      <div class="post-item" title="高扩展低耦合的webview">
-        <div class="time-m-d">02-07</div>
-        <div class="title">
-          <a href="/2023/02/07/RelaxWebView/">
-            <span>高扩展低耦合的webview</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
       
-      <div class="post-item" title="Okhttp原理分析">
-        <div class="time-m-d">02-01</div>
-        <div class="title">
-          <a href="/2021/02/01/OKhttp/">
-            <span>Okhttp原理分析</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2020</span>
-          </h2>
-        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li></ol>
       
-      <div class="post-item" title="设计模式-装饰器">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/">
-            <span>设计模式-装饰器</span>
-          </a>
-        </div>
-      </div>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="设计模式-构建者">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%9E%84%E5%BB%BA%E8%80%85/">
-            <span>设计模式-构建者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-享元">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83/">
-            <span>设计模式-享元</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-责任链">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE/">
-            <span>设计模式-责任链</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-观察者">
-        <div class="time-m-d">05-06</div>
-        <div class="title">
-          <a href="/2020/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85/">
-            <span>设计模式-观察者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-工厂">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2020/01/06/%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-            <span>设计模式-工厂</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2018</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="算法-归并排序">
-        <div class="time-m-d">01-09</div>
-        <div class="title">
-          <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-            <span>算法-归并排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-插入排序">
-        <div class="time-m-d">01-09</div>
-        <div class="title">
-          <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
-            <span>算法-插入排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-选择排序">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2018/01/06/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-            <span>算法-选择排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-冒泡排序">
-        <div class="time-m-d">01-05</div>
-        <div class="title">
-          <a href="/2018/01/05/%E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
-            <span>算法-冒泡排序</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2017</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="数据结构-哈希表">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%93%88%E5%B8%8C%E8%A1%A8/">
-            <span>数据结构-哈希表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-二叉树">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91/">
-            <span>数据结构-二叉树</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-队列">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/">
-            <span>数据结构-队列</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-栈">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/">
-            <span>数据结构-栈</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-链表">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/">
-            <span>数据结构-链表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-数组">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84/">
-            <span>数据结构-数组</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -567,6 +512,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F + '&url=' + http%3A%2F%2Fexample.com%2F2018%2F01%2F09%2F%25E7%25AE%2597%25E6%25B3%2595-%25E6%258F%2592%25E5%2585%25A5%25E6%258E%2592%25E5%25BA%258F%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
