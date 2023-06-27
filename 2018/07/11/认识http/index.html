@@ -11,7 +11,7 @@
   
   <title>
     
-      算法-归并排序 
+      认识http 
       
       
       |
@@ -151,19 +151,19 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">算法-归并排序</div>
+      <div class="post-title">认识http</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-05-10 08:53:59
+          2023-05-13 22:15:25
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
-                    #算法
+                  <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                    #计算机网络
                   </a>
                 </span>
                 
@@ -171,30 +171,80 @@
           
       </div>
       <div class="markdown-body">
-        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>归并排序是一种分治算法，其核心思想是将一个大问题分解成若干个小问题来解决，然后将这些小问题的解合并起来，最终得到整个问题的解。</p>
-<p>归并排序的大致过程</p>
-<ol>
-<li><p>分解。将待排序的序列递归地分解成两个子序列，直到每个子序列只剩下一个元素为止。</p>
-</li>
-<li><p>合并。将两个有序的子序列合并成一个有序的序列。这个过程中需要使用到一个辅助数组，将两个子序列中的元素按顺序比较，将较小的元素先放入辅助数组中，直到两个子序列中的所有元素都放入辅助数组中。</p>
-</li>
-<li><p>归并。将所有子序列的结果不断地归并，最终得到整个序列的有序结果。</p>
-</li>
-<li><p>时间复杂度：O(nlogn)</p>
-<p>空间复杂度：O(n)</p>
-</li>
-</ol>
-<p><video src="/2018/01/13/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/mergesort.mp4"  style="width: 100%; height: auto;" controls>  </video></p>
-<p>代码示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr, int left, int right) &#123;</span><br><span class="line">    if (left &lt; right) &#123;//边界的判断</span><br><span class="line">        // 分解：将待排序的数组不断地拆分成左右两个子数组</span><br><span class="line">        int mid = (left + right) / 2;//确定中值</span><br><span class="line">        //递归拆分左子数组，当left, mid指向同一个元素的时候说明子数组里就只包含一个元素了，也就是到了递归的边界条件</span><br><span class="line">        mergeSort(arr, left, mid);</span><br><span class="line">        //递归拆分右子数组，当mid+1,right指向同一个元素的时候说明子数组里就只包含一个元素了，也就是到了递归的边界条件</span><br><span class="line">        mergeSort(arr, mid + 1, right);</span><br><span class="line"></span><br><span class="line">        //合并：将拆分后的左右两个子数组合并成一个有序的数组</span><br><span class="line">        int[] temp = new int[right - left + 1];</span><br><span class="line">        //左子数组的起始下标</span><br><span class="line">        int i = left, </span><br><span class="line">        //右子数组的起始下标</span><br><span class="line">        j = mid + 1, </span><br><span class="line">        //辅助数组的起始下标</span><br><span class="line">        k = 0;</span><br><span class="line"> //如果左子数组的index下标和右子数组的index都在各自数组的规模的范围内，分别从两个数组的起始下标开始比较大小，数值小的添加进辅助数组</span><br><span class="line">        while (i &lt;= mid &amp;&amp; j &lt;= right) &#123;</span><br><span class="line">            if (arr[i] &lt;= arr[j]) &#123;</span><br><span class="line">                temp[k++] = arr[i++];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                temp[k++] = arr[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //如果左子数组还有剩余元素没有添加进辅助数组，则添加进辅助数组</span><br><span class="line">        while (i &lt;= mid) &#123;</span><br><span class="line">            temp[k++] = arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">         //如果右子数组还有剩余元素没有添加进辅助数组，则添加进辅助数组</span><br><span class="line">        while (j &lt;= right) &#123;</span><br><span class="line">            temp[k++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 将排好序的临时数组 temp 复制回原数组 arr 中</span><br><span class="line">        for (int p = 0; p &lt; temp.length; p++) &#123;</span><br><span class="line">            arr[left + p] = temp[p];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>超文本传输协议（HTTP）是一个用于传输超媒体文档（例如 HTML）的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BA%94%E7%94%A8%E5%B1%82">应用层</a>协议。它是为 Web 浏览器与 Web 服务器之间的通信而设计的，但也可以用于其他目的。HTTP 遵循经典的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E5%BE%9E%E5%BC%8F%E6%9E%B6%E6%A7%8B">客户端—服务端模型</a>，客户端打开一个连接以发出请求，然后等待直到收到服务器端响应。HTTP 是<a target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E6%97%A0%E7%8A%B6%E6%80%81%E5%8D%8F%E8%AE%AE">无状态协议</a>，这意味着服务器不会在两个请求之间保留任何数据（状态）。</p>
+<p>html示例：</p>
+<img src="/2018/07/11/%E8%AE%A4%E8%AF%86http/hypertext.png" class="">
 
+<h4 id="用于浏览器"><a href="#用于浏览器" class="headerlink" title="用于浏览器"></a>用于浏览器</h4><p>⽤户输⼊地址后回⻋或点击链接 -&gt; 浏览器拼装 HTTP 报⽂并发送请求给服务器 -&gt; 服 务器处理请求后发送响应报⽂给浏览器 -&gt; 浏览器解析响应报⽂并使⽤渲染引擎显示 到界⾯</p>
+<h4 id="用于app"><a href="#用于app" class="headerlink" title="用于app"></a>用于app</h4><p>⽤户点击或界⾯⾃动触发联⽹需求 -&gt; Android 代码调⽤拼装 HTTP 报⽂并发送请求 到服务器 -&gt; 服务器处理请求后发送响应报⽂给⼿机 -&gt; Android 代码处理响应报⽂并作出相应处理。</p>
+<h3 id="http请求和相应"><a href="#http请求和相应" class="headerlink" title="http请求和相应"></a>http请求和相应</h3><h4 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h4><p>HTTP 请求的内容通称为”资源”。”资源“这一概念非常宽泛，它可以是一份文档，一张图片，或所有其他你能够想到的格式。每个资源都由一个 (<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/URI">URI</a>) 来进行标识。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://www.example.com:80/path/to/myfile.html?</span><br><span class="line"></span><br><span class="line">协议名称：http://</span><br><span class="line">主机和端口号：www.example.com:80</span><br><span class="line">请求路径：/path/to/myfile.html</span><br></pre></td></tr></table></figure>
+
+<h5 id="请求报文："><a href="#请求报文：" class="headerlink" title="请求报文："></a>请求报文：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ET /path/to/resource HTTP/1.1</span><br><span class="line">Host: example.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: en-US,en;q=0.9</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>字段说明：</p>
+<ul>
+<li><code>ET /path/to/resource HTTP/1.1</code>：请求行，包括请求方法（ET）、请求路径（&#x2F;path&#x2F;to&#x2F;resource）和 HTTP 版本（HTTP&#x2F;1.1）。</li>
+<li><code>Host: example.com</code>：请求头，指定请求的主机名和端口号。</li>
+<li><code>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36</code>：请求头，指定客户端浏览器的信息，包括浏览器类型、操作系统和版本号等。</li>
+<li><code>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</code>：请求头，指定客户端可以接受的响应类型。</li>
+<li><code>Accept-Encoding: gzip, deflate, br</code>：请求头，指定客户端可以接受的压缩算法。</li>
+<li><code>Accept-Language: en-US,en;q=0.9</code>：请求头，指定客户端可以接受的语言。</li>
+<li><code>Connection: keep-alive</code>：请求头，指定客户端与服务器的连接是否保持活动状态。</li>
+</ul>
+<h5 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Wed, 12 May 2023 08:00:00 GMT</span><br><span class="line">Server: Apache/2.4.6 (CentOS)</span><br><span class="line">Last-Modified: Tue, 11 May 2023 10:00:00 GMT</span><br><span class="line">ETag: &quot;123456-abcdef&quot;</span><br><span class="line">Content-Length: 1234</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;Example Domain&lt;/title&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot; /&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;Content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;h1&gt;Example Domain&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;This domain is established to be used for illustrative examples in documents. You may use this domain in examples without prior coordination or asking for permission.&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>字段说明：</p>
+<ul>
+<li><code>HTTP/1.1 200 OK</code>：响应行，包括HTTP版本号（1.1）、状态码（200）和状态消息（OK）。</li>
+<li><code>Date: Wed, 12 May 2023 08:00:00 GMT</code>：表示响应的日期和时间，格式为 RFC 1123。</li>
+<li><code>Server: Apache/2.4.6 (CentOS)</code>：服务器信息，表示响应的是 Apache 2.4.6 版本。</li>
+<li><code>Last-Modified: Tue, 11 May 2023 10:00:00 GMT</code>：表示资源的最后修改时间，格式为 RFC 1123。</li>
+<li><code>ETag: &quot;123456-abcdef&quot;</code>：表示资源的实体标识符，可以用于缓存控制。</li>
+<li><code>Content-Length: 1234</code>：表示响应体的长度（以字节为单位）。</li>
+<li><code>Content-Type: text/html; charset=UTF-8</code>：表示响应体的 MIME 类型和字符编码。</li>
+<li><code>&lt;!DOCTYPE html&gt;...</code>：表示响应体，即实际的文档内容。</li>
+</ul>
+<p>常见的相应状态码：</p>
+<ul>
+<li><p>200 OK：请求成功，服务器已成功返回请求所需信息。通常用于 GET 和 POST 请求。</p>
+</li>
+<li><p>201 Created：请求成功，服务器已成功创建资源。通常用于 POST 请求。</p>
+</li>
+<li><p>204 No Content：请求成功，服务器已成功处理请求，但不需要返回任何实体内容。通常用于 DELETE 请求。</p>
+</li>
+<li><p>301 Moved Permanently：请求的资源已经被永久移动到新的 URL，所有对该资源的请求都应该使用新的 URL。301状态码的响应头里通常包括一个Location字段，用于指定新的URL。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Location: https://www.example.com/new-url</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>302 Found：请求的资源临时被移动到新的 URL，所有对该资源的请求都应该使用新的 URL。与 301 状态码不同，302 状态码表示请求的资源只是暂时被移动。302状态码的响应头里也通常包括一个Location字段，用于指定新的URL。例如：</p>
+</li>
+<li><pre><code>HTTP/1.1 302 Found
+Location: https://www.example.com/new-url
+</code></pre>
+</li>
+<li></li>
+<li><p>304 Not Modified：请求的资源未修改，服务器不需要返回任何实体内容，客户端可以使用本地缓存的内容。通常用于 GET 请求。</p>
+</li>
+<li><p>400 Bad Request：请求无效，服务器无法理解请求的格式，语法或参数。</p>
+</li>
+<li><p>401 Unauthorized：请求需要身份验证，客户端需要提供有效的身份验证信息。</p>
+</li>
+<li><p>403 Forbidden：服务器已经理解请求，但是拒绝执行它，因为客户端没有访问权限。</p>
+</li>
+<li><p>404 Not Found：服务器无法找到请求的资源，通常用于 GET 请求。</p>
+</li>
+<li><p>500 Internal Server Error：服务器内部错误，无法完成请求。</p>
+</li>
+</ul>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" target="_self">
+              <a href="/2018/01/13/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -203,15 +253,15 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2023-05-10 08:53:59
+              2023-05-13 22:15:25
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags mr-10" title="Tags"></i>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
-                        #算法
+                      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">
+                        #计算机网络
                       </a>
                     </span>
                     
@@ -220,7 +270,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2018/07/11/%E8%AE%A4%E8%AF%86http/" target="_self">
+              <a href="/2020/01/06/%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -237,7 +287,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">用于浏览器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E4%BA%8Eapp"><span class="toc-text">用于app</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E8%AF%B7%E6%B1%82%E5%92%8C%E7%9B%B8%E5%BA%94"><span class="toc-text">http请求和相应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82"><span class="toc-text">请求</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%EF%BC%9A"><span class="toc-text">请求报文：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-text">响应报文</span></a></li></ol></li></ol></li></ol>
       
     </div>
   </div>
@@ -523,12 +573,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F + '&url=' + http%3A%2F%2Fexample.com%2F2018%2F01%2F13%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%25BD%2592%25E5%25B9%25B6%25E6%258E%2592%25E5%25BA%258F%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%AE%A4%E8%AF%86http + '&url=' + http%3A%2F%2Fexample.com%2F2018%2F07%2F11%2F%25E8%25AE%25A4%25E8%25AF%2586http%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2018/01/13/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2018/07/11/%E8%AE%A4%E8%AF%86http/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

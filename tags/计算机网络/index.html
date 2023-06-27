@@ -11,8 +11,8 @@
   
   <title>
     
-      算法-归并排序 
-      
+      Tag 
+       : 计算机网络
       
       |
     
@@ -106,162 +106,30 @@
 
 
       <div class="flex-container">
-        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
-<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
 
-
-  <!-- LaTex Display -->
-
+<div class="container tag-details">
+  <div class="content-title">
+    <h2>
+      <span>计算机网络</span>
+    </h2>
+  </div>
   
-    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
-  
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    }
-  </script>
-
-
-
-
-
-  <!-- clipboard -->
-
-  
-    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
-  
-  
-<script src="/js/codeCopy.js"></script>
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
-  <div class="container post-details" id="post-details">
-    <div class="post-content">
-      <div class="post-title">算法-归并排序</div>
-      <div class="post-attach">
-        <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-05-10 08:53:59
-        </span>
-        
-              <span class="post-tags">
-                <i class="iconfont icon-tags mr-10" title="Tags"></i>
-                
-                <span class="span--tag mr-8">
-                  <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
-                    #算法
-                  </a>
-                </span>
-                
-              </span>
-          
+    <div class="post-list">
+      <div class="post-item" title="认识http">
+        <span class="time-m-d">2018-07-11</span>
+        <a href="/2018/07/11/%E8%AE%A4%E8%AF%86http/">
+          <span>认识http</span>
+        </a>
       </div>
-      <div class="markdown-body">
-        <h3 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h3><p>归并排序是一种分治算法，其核心思想是将一个大问题分解成若干个小问题来解决，然后将这些小问题的解合并起来，最终得到整个问题的解。</p>
-<p>归并排序的大致过程</p>
-<ol>
-<li><p>分解。将待排序的序列递归地分解成两个子序列，直到每个子序列只剩下一个元素为止。</p>
-</li>
-<li><p>合并。将两个有序的子序列合并成一个有序的序列。这个过程中需要使用到一个辅助数组，将两个子序列中的元素按顺序比较，将较小的元素先放入辅助数组中，直到两个子序列中的所有元素都放入辅助数组中。</p>
-</li>
-<li><p>归并。将所有子序列的结果不断地归并，最终得到整个序列的有序结果。</p>
-</li>
-<li><p>时间复杂度：O(nlogn)</p>
-<p>空间复杂度：O(n)</p>
-</li>
-</ol>
-<p><video src="/2018/01/13/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/mergesort.mp4"  style="width: 100%; height: auto;" controls>  </video></p>
-<p>代码示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public static void mergeSort(int[] arr, int left, int right) &#123;</span><br><span class="line">    if (left &lt; right) &#123;//边界的判断</span><br><span class="line">        // 分解：将待排序的数组不断地拆分成左右两个子数组</span><br><span class="line">        int mid = (left + right) / 2;//确定中值</span><br><span class="line">        //递归拆分左子数组，当left, mid指向同一个元素的时候说明子数组里就只包含一个元素了，也就是到了递归的边界条件</span><br><span class="line">        mergeSort(arr, left, mid);</span><br><span class="line">        //递归拆分右子数组，当mid+1,right指向同一个元素的时候说明子数组里就只包含一个元素了，也就是到了递归的边界条件</span><br><span class="line">        mergeSort(arr, mid + 1, right);</span><br><span class="line"></span><br><span class="line">        //合并：将拆分后的左右两个子数组合并成一个有序的数组</span><br><span class="line">        int[] temp = new int[right - left + 1];</span><br><span class="line">        //左子数组的起始下标</span><br><span class="line">        int i = left, </span><br><span class="line">        //右子数组的起始下标</span><br><span class="line">        j = mid + 1, </span><br><span class="line">        //辅助数组的起始下标</span><br><span class="line">        k = 0;</span><br><span class="line"> //如果左子数组的index下标和右子数组的index都在各自数组的规模的范围内，分别从两个数组的起始下标开始比较大小，数值小的添加进辅助数组</span><br><span class="line">        while (i &lt;= mid &amp;&amp; j &lt;= right) &#123;</span><br><span class="line">            if (arr[i] &lt;= arr[j]) &#123;</span><br><span class="line">                temp[k++] = arr[i++];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                temp[k++] = arr[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //如果左子数组还有剩余元素没有添加进辅助数组，则添加进辅助数组</span><br><span class="line">        while (i &lt;= mid) &#123;</span><br><span class="line">            temp[k++] = arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">         //如果右子数组还有剩余元素没有添加进辅助数组，则添加进辅助数组</span><br><span class="line">        while (j &lt;= right) &#123;</span><br><span class="line">            temp[k++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 将排好序的临时数组 temp 复制回原数组 arr 中</span><br><span class="line">        for (int p = 0; p &lt; temp.length; p++) &#123;</span><br><span class="line">            arr[left + p] = temp[p];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      </div>
-      
-        <div class="prev-or-next">
-          <div class="post-foot-next">
-            
-              <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" target="_self">
-                <i class="iconfont icon-chevronleft"></i>
-                <span>Prev</span>
-              </a>
-            
-          </div>
-          <div class="post-attach">
-            <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2023-05-10 08:53:59
-            </span>
-            
-                  <span class="post-tags">
-                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/tags/%E7%AE%97%E6%B3%95/" title="算法">
-                        #算法
-                      </a>
-                    </span>
-                    
-                  </span>
-              
-          </div>
-          <div class="post-foot-prev">
-            
-              <a href="/2018/07/11/%E8%AE%A4%E8%AF%86http/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
-            
-          </div>
-        </div>
-      
     </div>
-    
-  <div id="btn-catalog" class="btn-catalog">
-    <i class="iconfont icon-catalog"></i>
-  </div>
-  <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
-    <div class="catalog-content">
-      
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E4%BA%86%E8%A7%A3"><span class="toc-text">概念了解</span></a></li></ol>
-      
-    </div>
-  </div>
-
   
-<script src="/js/catalog.js"></script>
-
-
-
-
+  <nav class="post-navigation">
     
-      <div class="comments-container">
-        
-
-
-
-
-
-
-
-      </div>
+    <span class="page-num">1 / 1</span>
     
-  </div>
-
+  </nav>
+</div>
 
         
 <div class="footer">
@@ -516,24 +384,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F + '&url=' + http%3A%2F%2Fexample.com%2F2018%2F01%2F13%2F%25E7%25AE%2597%25E6%25B3%2595-%25E5%25BD%2592%25E5%25B9%25B6%25E6%258E%2592%25E5%25BA%258F%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2018/01/13/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
   
   
 <script src="/js/shares.js"></script>
