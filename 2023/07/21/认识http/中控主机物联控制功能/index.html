@@ -11,11 +11,6 @@
   
   <title>
     
-      archive_a: 2018/7 
-      
-      
-      |
-    
      relax&#39;s blog
   </title>
 
@@ -106,263 +101,124 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2023</span>
-          </h2>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title"></div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-07-21 09:31:48
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h1 id="中控主机物联控制功能"><a href="#中控主机物联控制功能" class="headerlink" title="中控主机物联控制功能"></a>中控主机物联控制功能</h1><p>优势：</p>
+<ul>
+<li>指令录入，现有控制每一次外接设备的变更都需要再次手动录入指令，而中控主机只需要一次录入，后续就可以从设备库读取指令，减少了手动录入的概率。</li>
+<li>设备库积累，与现有的设备控制最大的不同就是对设备数据进行管理，只要是注册过的设备都会被录入进设备库，不同设备只需要录入一次，而且支持设备之间的设备库共享，后期考虑将设备库数据进行云端合并，然后从云端直接下发设备库数据到中控主机。</li>
+<li>数据分析，设备库数据可以用于进行数据分析，可以根据设备类型占比划分解决问题的优先级。</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2023/02/07/RelaxWebView/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-07-21 09:31:48
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
       
-      <div class="post-item" title="">
-        <div class="time-m-d">07-21</div>
-        <div class="title">
-          <a href="/2023/07/21/%E8%AE%A4%E8%AF%86http/%E4%B8%AD%E6%8E%A7%E4%B8%BB%E6%9C%BA%E7%89%A9%E8%81%94%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD/">
-            <span></span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="高扩展低耦合的webview">
-        <div class="time-m-d">02-07</div>
-        <div class="title">
-          <a href="/2023/02/07/RelaxWebView/">
-            <span>高扩展低耦合的webview</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2022</span>
-          </h2>
-        </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
       
-      <div class="post-item" title="Android-组件化">
-        <div class="time-m-d">08-12</div>
-        <div class="title">
-          <a href="/2022/08/12/Android-%E7%BB%84%E4%BB%B6%E5%8C%96/">
-            <span>Android-组件化</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E6%8E%A7%E4%B8%BB%E6%9C%BA%E7%89%A9%E8%81%94%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD"><span class="toc-text">中控主机物联控制功能</span></a></li></ol>
       
-      <div class="post-item" title="Okhttp原理分析">
-        <div class="time-m-d">02-01</div>
-        <div class="title">
-          <a href="/2021/02/01/OKhttp/">
-            <span>Okhttp原理分析</span>
-          </a>
-        </div>
-      </div>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2020</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="设计模式-装饰器">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A3%85%E9%A5%B0%E5%99%A8/">
-            <span>设计模式-装饰器</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-构建者">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%9E%84%E5%BB%BA%E8%80%85/">
-            <span>设计模式-构建者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-享元">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BA%AB%E5%85%83/">
-            <span>设计模式-享元</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-责任链">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2020/05/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%B4%A3%E4%BB%BB%E9%93%BE/">
-            <span>设计模式-责任链</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-观察者">
-        <div class="time-m-d">05-06</div>
-        <div class="title">
-          <a href="/2020/05/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85/">
-            <span>设计模式-观察者</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="设计模式-工厂">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2020/01/06/%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-            <span>设计模式-工厂</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2018</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="认识http">
-        <div class="time-m-d">07-11</div>
-        <div class="title">
-          <a href="/2018/07/11/%E8%AE%A4%E8%AF%86http/">
-            <span>认识http</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-归并排序">
-        <div class="time-m-d">01-13</div>
-        <div class="title">
-          <a href="/2018/01/13/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-            <span>算法-归并排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-插入排序">
-        <div class="time-m-d">01-09</div>
-        <div class="title">
-          <a href="/2018/01/09/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
-            <span>算法-插入排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-选择排序">
-        <div class="time-m-d">01-06</div>
-        <div class="title">
-          <a href="/2018/01/06/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-            <span>算法-选择排序</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="算法-冒泡排序">
-        <div class="time-m-d">01-05</div>
-        <div class="title">
-          <a href="/2018/01/05/%E7%AE%97%E6%B3%95-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
-            <span>算法-冒泡排序</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2017</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="数据结构-哈希表">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%93%88%E5%B8%8C%E8%A1%A8/">
-            <span>数据结构-哈希表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-二叉树">
-        <div class="time-m-d">06-08</div>
-        <div class="title">
-          <a href="/2017/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%BA%8C%E5%8F%89%E6%A0%91/">
-            <span>数据结构-二叉树</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-队列">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/">
-            <span>数据结构-队列</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-栈">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/">
-            <span>数据结构-栈</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-链表">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/">
-            <span>数据结构-链表</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="数据结构-数组">
-        <div class="time-m-d">05-07</div>
-        <div class="title">
-          <a href="/2017/05/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%95%B0%E7%BB%84/">
-            <span>数据结构-数组</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2016</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="隐私协议">
-        <div class="time-m-d">06-27</div>
-        <div class="title">
-          <a href="/2016/06/27/Privacy-Policy/">
-            <span>隐私协议</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -617,6 +473,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' +  + '&url=' + http%3A%2F%2Fexample.com%2F2023%2F07%2F21%2F%25E8%25AE%25A4%25E8%25AF%2586http%2F%25E4%25B8%25AD%25E6%258E%25A7%25E4%25B8%25BB%25E6%259C%25BA%25E7%2589%25A9%25E8%2581%2594%25E6%258E%25A7%25E5%2588%25B6%25E5%258A%259F%25E8%2583%25BD%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2023/07/21/%E8%AE%A4%E8%AF%86http/%E4%B8%AD%E6%8E%A7%E4%B8%BB%E6%9C%BA%E7%89%A9%E8%81%94%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
